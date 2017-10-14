@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
-const UserSchema = mongoose.Schema({
+const turnSchema = mongoose.Schema({
   // email : String,
   // username: String,
   // password: String,
