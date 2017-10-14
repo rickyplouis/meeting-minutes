@@ -12,8 +12,7 @@ export default class JoinRoom extends React.Component {
   render(){
     return(
       <div>
-        <h1> On Join room page          
-        </h1>
+        <h1> On joinRoom.js</h1>
         <Button>
           Continue
         </Button>

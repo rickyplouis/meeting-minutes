@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import Timer from '../components/timer'
+import UserList from '../components/userList'
 
 export default () => (
   <div>
@@ -16,6 +17,7 @@ export default () => (
     </ul>
     <div style={{height: '10vh', width: '30vw', marginLeft: '30vw', marginRight: '30vw'}}>
       <Timer/>
+      <UserList/>
     </div>
   </div>
 )

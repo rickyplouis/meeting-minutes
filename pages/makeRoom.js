@@ -12,7 +12,7 @@ export default class MakeRoom extends React.Component {
   render(){
     return(
       <div>
-        <h1>On MakeRoom.js</h1>
+        <h1>On makeRoom.js</h1>
         <Button>Contineu</Button>
       </div>
     )
