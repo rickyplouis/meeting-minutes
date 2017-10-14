@@ -12,7 +12,10 @@ export default () => (
     <ul>
       <li><Link href='/b' as='/a'><a>a</a></Link></li>
       <li><Link href='/a' as='/b'><a>b</a></Link></li>
-      <li><Link href='/componentList' as='/componentList'><a>List of All UI Compnoents</a></Link></li>
+      <li><Link href='/componentList' as='/componentList'><a>b</a></Link></li>
     </ul>
+    <div style={{height: '10vh', width: '30vw', marginLeft: '30vw', marginRight: '30vw'}}>
+      <Timer/>
+    </div>
   </div>
 )
