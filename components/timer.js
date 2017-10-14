@@ -4,7 +4,7 @@ export default class Timer extends React.Component {
     super();
     this.state = {
       time: {},
-      seconds: 59,
+      seconds: 10,
       initialTime: 0,
       percent: 100,
     };
@@ -68,11 +68,15 @@ export default class Timer extends React.Component {
     clearInterval(this.timer);
   }
 
+  displaySeconds(secs){
+    return secs < 10 ? '0' + secs : secs;
+  }
+
   render() {
     return(
       <div>
         //TODO: Input doesn't work so need to incorporate that into the state
-        <Header as='h1'>Timer: {this.state.m || 0} : {this.state.time.s}</Header>
+        <Header as='h1'>Timer: {this.state.m || 0}:{this.displaySeconds(this.state.time.s)}</Header>
         <div style={{width: '75vw',}}>
           <Input labelPosition='left' type='number' placeholder='Mins'>
             <Label basic>Minutes</Label>
