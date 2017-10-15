@@ -10,6 +10,7 @@ const expressWinston = require('express-winston');
 
 const userRouter = require('./routes/userRouter');
 const roomRouter = require('./routes/roomRouter');
+const roomHandler = require('./routes/roomHandler');
 const configDB = require('./config/database');
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -43,17 +44,12 @@ io.on('connection', socket => {
 })
 
 nextApp.prepare().then(() => {
-
+  app.get('/', (req, res) => {
+    return app.render(req, res);
+  })
   app.use('/api/user', userRouter);
   app.use('/api/room', roomRouter);
-
-  app.get('/a', (req, res) => {
-    return app.render(req, res, '/b', req.query)
-  });
-
-  app.get('/b', (req, res) => {
-    return app.render(req, res, '/a', req.query)
-  });
+  app.use('/room', roomHandler);
 
   app.get('*', (req, res) => {
     return nextHandler(req, res)
