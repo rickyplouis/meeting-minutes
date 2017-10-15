@@ -1,12 +1,10 @@
 import { Button } from 'semantic-ui-react'
-import Link from 'next/link'
-import ImageExample from '../components/imageexample'
-import Example from '../components/example.js'
 import InputComponent from '../components/input'
 import Head from 'next/head'
+import FormExample from '../components/formexample'
 import Container from '../components/container'
 
-export default class MakeRoom extends React.Component {
+export default class MakeForm extends React.Component {
 
   constructor(props){
     super(props);
@@ -22,15 +20,8 @@ export default class MakeRoom extends React.Component {
           <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css' />
         </Head>
         <Container>
-        <h1><ImageExample/>meeting minutes</h1>
-        <InputComponent/>
-        <h2>
-        <Link href="/index">
-        <Button primary>Back</Button>
-        </Link>
-        <Link href="/makeform">
-        <Button primary>Create</Button>
-        </Link></h2>
+        <h1>Add Agenda Items</h1>
+        <FormExample/>
         </Container>
       </div>
     )

@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
-
+import ImageExample from '../components/imageexample'
 import { Header, Button } from 'semantic-ui-react'
-
 import Container from '../components/container'
 
 export default () => (
@@ -12,16 +11,17 @@ export default () => (
     </Head>
       <Container>
         <Header as="h1">
-          Welcome to Meeting Minutes
+        <ImageExample/>
+          meeting minutes
         </Header>
         <Link href="/makeRoom">
           <Button primary>Make Room</Button>
         </Link>
         <Link href="/joinRoom">
-          <Button secondary>Join Room</Button>
+          <Button primary>Join Room</Button>
         </Link>
         <Link href="componentList">
-          <Button secondary> List of All Components</Button>
+          <Button primary> List of All Components</Button>
         </Link>
       </Container>
   </div>
