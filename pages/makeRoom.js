@@ -13,13 +13,10 @@ export default class MakeRoom extends React.Component {
 
   render(){
     return(
-      <div>
-        <Container>
-          <h1>On makeRoom.js</h1>
-          <RoomForm/>
-        </Container>
-      </div>
-
+      <Container>
+        <h1>On makeRoom.js</h1>
+        <RoomForm/>
+      </Container>
     )
   }
 }

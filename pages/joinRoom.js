@@ -1,4 +1,14 @@
-import {Button} from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
+
+import Router from 'next/router'
+import Container from '../components/container'
+import UrlForm from '../components/urlForm'
+
+const handler = () =>
+  Router.push({
+    pathname: '/room',
+    query: { name: 'Test' }
+  })
 
 export default class JoinRoom extends React.Component {
 
@@ -9,14 +19,16 @@ export default class JoinRoom extends React.Component {
     }
   }
 
+  joinRoom(){
+    return handler();
+  }
+
   render(){
     return(
-      <div>
-        <h1> On joinRoom.js</h1>
-        <Button>
-          Continue
-        </Button>
-      </div>
+      <Container>
+        <h1>Join A Room</h1>
+        <UrlForm/>
+      </Container>
     )
   }
 }
