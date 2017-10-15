@@ -138,3 +138,4 @@ tags
 # End of https://www.gitignore.io/api/vim,node,macos,sublimetext
 
 .next/
+.envrc
