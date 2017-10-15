@@ -1,4 +1,6 @@
-import { Button } from 'semantic-ui-react'
+import Container from '../components/container'
+
+import RoomForm from '../components/roomForm'
 
 export default class MakeRoom extends React.Component {
 
@@ -12,9 +14,12 @@ export default class MakeRoom extends React.Component {
   render(){
     return(
       <div>
-        <h1>On makeRoom.js</h1>
-        <Button>Contineu</Button>
+        <Container>
+          <h1>On makeRoom.js</h1>
+          <RoomForm/>
+        </Container>
       </div>
+
     )
   }
 }
