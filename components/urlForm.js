@@ -1,8 +1,6 @@
-import { Button } from 'semantic-ui-react'
-
+import React from 'react'
+import { Input } from 'semantic-ui-react'
 import Router from 'next/router'
-import Container from '../components/container'
-import UrlForm from '../components/urlForm'
 
 const handler = () =>
   Router.push({
@@ -10,8 +8,8 @@ const handler = () =>
     query: { name: 'Test' }
   })
 
-export default class JoinRoom extends React.Component {
 
+export default class UrlForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -25,10 +23,7 @@ export default class JoinRoom extends React.Component {
 
   render(){
     return(
-      <Container>
-        <h1>Join A Room</h1>
-        <UrlForm/>
-      </Container>
+      <Input action='Submit' placeholder='http://bestroom.com' onClick={this.joinRoom} />
     )
   }
 }
