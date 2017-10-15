@@ -14,13 +14,15 @@ export default () => (
         <Header as="h1">
           Welcome to Meeting Minutes
         </Header>
-        <Button primary>Create Room</Button>
-        <Button secondary>Join Room</Button>
-        <ul>
-          <li><Link href='/b' as='/a'><a>a</a></Link></li>
-          <li><Link href='/a' as='/b'><a>b</a></Link></li>
-          <li><Link href='/componentList' as='/componentList'><a>List of All UI Compnoents</a></Link></li>
-        </ul>
-    </Container>
+        <Link href="/makeRoom">
+          <Button primary>Make Room</Button>
+        </Link>
+        <Link href="/joinRoom">
+          <Button secondary>Join Room</Button>
+        </Link>
+        <Link href="componentList">
+          <Button secondary> List of All Components</Button>
+        </Link>
+      </Container>
   </div>
 )

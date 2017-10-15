@@ -72,22 +72,27 @@ export default class Timer extends React.Component {
     return secs < 10 ? '0' + secs : secs;
   }
 
+  renderTimeInput(){
+    return (
+      <div style={{width: '75vw',}}>
+        <Input labelPosition='left' type='number' placeholder='Mins'>
+          <Label basic>Minutes</Label>
+          <input />
+        </Input>
+        <Input labelPosition='left' type='number' placeholder='Seconds'>
+          <Label basic>Seconds</Label>
+          <input />
+        </Input>
+      </div>
+    )
+  }
+
+  //TODO: Input doesn't work so need to incorporate that into the state
   render() {
     return(
       <div>
-        //TODO: Input doesn't work so need to incorporate that into the state
-        <Header as='h1'>Timer: {this.state.m || 0}:{this.displaySeconds(this.state.time.s)}</Header>
-        <div style={{width: '75vw',}}>
-          <Input labelPosition='left' type='number' placeholder='Mins'>
-            <Label basic>Minutes</Label>
-            <input />
-          </Input>
-          <Input labelPosition='left' type='number' placeholder='Seconds'>
-            <Label basic>Seconds</Label>
-            <input />
-          </Input>
-        </div>
-        <Progress percent={this.state.percent} indicating />
+        <Header as='h4'>Time Remaining: {this.state.m || 0}:{this.displaySeconds(this.state.time.s)}</Header>
+        <Progress percent={this.state.percent} indicating size={'tiny'} style={{width: '20vw'}} />
         <Button onClick={this.startTimer} color='blue'>Start</Button>
         <Button onClick={this.pauseTimer} color='red'>Pause</Button>
       </div>
