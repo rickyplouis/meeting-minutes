@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt-nodejs');
 const RoomSchema = mongoose.Schema({
   name: String,
   participants: [String]
+  admin: String
 });
 
 RoomSchema.statics.findById = (id) => {

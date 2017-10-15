@@ -15,7 +15,7 @@ const configDB = require('./config/database');
 const dev = process.env.NODE_ENV !== 'production'
 const port = parseInt(process.env.PORT, 10) || 3000
 const nextApp = next({ dev });
-const handle = nextApp.getRequestHandler();
+const nextHandler = nextApp.getRequestHandler();
 const mongoURL = configDB.url;
 
 app.use(flash()); //use connect-flash for flash messages stored in session
@@ -56,10 +56,10 @@ nextApp.prepare().then(() => {
   });
 
   app.get('*', (req, res) => {
-    return handle(req, res)
+    return nextHandler(req, res)
   });
 
-  app.listen(port, (err) => {
+  server.listen(port, (err) => {
     if (err) throw err
     console.log(`> Ready on http://localhost:${port}`)
   });
