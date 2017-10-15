@@ -15,7 +15,7 @@ export default class Participants extends React.Component{
     return(
       <List divided verticalAlign='middle'>
         <List.Item>
-          <Header as="h2">Choose A User Below</Header>
+          <Header as="h2">Participants</Header>
         </List.Item>
         <List.Item>
           <List.Content floated='right'>

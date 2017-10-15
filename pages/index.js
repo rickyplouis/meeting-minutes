@@ -18,9 +18,6 @@ export default () => (
         <Link href="/joinRoom">
           <Button secondary>Join Room</Button>
         </Link>
-        <Link href="componentList">
-          <Button secondary> List of All Components</Button>
-        </Link>
       </Container>
   </div>
 )
