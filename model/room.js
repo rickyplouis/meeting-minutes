@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 const RoomSchema = mongoose.Schema({
   name: String,
-  participants: [String]
+  participants: [String],
   admin: String
 });
 
