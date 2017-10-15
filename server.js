@@ -7,11 +7,14 @@ const flash = require('connect-flash');
 const bodyParser = require('body-parser')
 const winston = require('winston');
 const expressWinston = require('express-winston');
+const faker = require('faker');
+const async = require('async');
 
 const userRouter = require('./routes/userRouter');
 const roomRouter = require('./routes/roomRouter');
 const roomHandler = require('./routes/roomHandler');
 const configDB = require('./config/database');
+const User = require('./model/user');
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = parseInt(process.env.PORT, 10) || 3000
@@ -34,10 +37,18 @@ app.use(expressWinston.logger({
 
 mongoose.connect(mongoURL);
 
-const messages = [];
-
 io.on('connection', socket => {
+  async.series([
+    (cb) => {
+      console.log('socket created');
+      User.create({ name: faker.name.findName() }, (err, instance) => {
+        cb();
+      });
+    },
+    (cb) => {
 
+    }
+  ])
 });
 
 nextApp.prepare().then(() => {
