@@ -1,65 +1,66 @@
-const express = require('express');
-const session = require('express-session');
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const next = require('next');
 const mongoose = require('mongoose');
-const passport = require('passport');
-const port = parseInt(process.env.PORT, 10) || 3000
 const flash = require('connect-flash');
-const configDB = require('./config/database');
 const bodyParser = require('body-parser')
-const dev = process.env.NODE_ENV !== 'production'
 const winston = require('winston');
 const expressWinston = require('express-winston');
-const app = next({ dev })
-const handle = app.getRequestHandler()
-require('./config/passport')(passport);
 
-const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/userRouter');
 const roomRouter = require('./routes/roomRouter');
+const configDB = require('./config/database');
 
-app.prepare()
-.then(() => {
-  const server = express();
-  //Required for passport
-  server.use(session({ secret: 'someSecretkey'}));
-  server.use(passport.initialize());
-  server.use(passport.session()); //persistent login sessions
-  server.use(flash()); //use connect-flash for flash messages stored in session
-  server.use( bodyParser.json() );
-  server.use(bodyParser.urlencoded({ extended: false }));
+const dev = process.env.NODE_ENV !== 'production'
+const port = parseInt(process.env.PORT, 10) || 3000
+const nextApp = next({ dev });
+const handle = nextApp.getRequestHandler();
+const mongoURL = configDB.url;
 
-  server.use(expressWinston.logger({
-    transports: [
-      new winston.transports.Console({
-        json: true,
-        colorize: true
-      })
-    ]
-  }));
+app.use(flash()); //use connect-flash for flash messages stored in session
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-  server.use('/', authRouter);
-  server.use('/api/user', userRouter);
-  server.use('/api/room', roomRouter);
+app.use(expressWinston.logger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true
+    })
+  ]
+}));
 
-  const mongoURL = configDB.url;
+mongoose.connect(mongoURL);
 
-  mongoose.connect(mongoURL);
+const messages = [];
 
-  server.get('/a', (req, res) => {
+io.on('connection', socket => {
+  socket.on('message', (data) => {
+    messages.push(data)
+    socket.broadcast.emit('message', data)
+  })
+})
+
+nextApp.prepare().then(() => {
+
+  app.use('/api/user', userRouter);
+  app.use('/api/room', roomRouter);
+
+  app.get('/a', (req, res) => {
     return app.render(req, res, '/b', req.query)
-  })
+  });
 
-  server.get('/b', (req, res) => {
+  app.get('/b', (req, res) => {
     return app.render(req, res, '/a', req.query)
-  })
+  });
 
-  server.get('*', (req, res) => {
+  app.get('*', (req, res) => {
     return handle(req, res)
-  })
+  });
 
-  server.listen(port, (err) => {
+  app.listen(port, (err) => {
     if (err) throw err
     console.log(`> Ready on http://localhost:${port}`)
-  })
+  });
 })
