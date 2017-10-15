@@ -13,7 +13,11 @@ router.route('/')
     });
   })
   .post((req, res, next) => {
-    Room.create({ name: req.body.name }, (err, room) => {
+    Room.create({ 
+      name: req.body.name,
+      participants: req.body.participants,
+      admin: req.body.admin
+    }, (err, room) => {
       if(err) {
         return console.log(err);
       }

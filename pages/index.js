@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Link from 'next/link'
 import Head from 'next/head'
 import ImageExample from '../components/imageexample'

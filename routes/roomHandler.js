@@ -3,14 +3,17 @@ const Room = require('../model/room');
 const router = express.Router();
 
 router.route('/')
+  .get((req, res, next) => {
+    return res.redirect('../');
+  });
 router.route('/:id')
   .get((req, res, next) => {
-    Room.findById(req.params.id, (err, room) => {
-      if(err) {
-        return console.log(err);
+    Room.findById(req.params.id, (err, entity) => {
+      if (err || !entity) {
+        return res.redirect('../');
       }
-      return res.status(200).json(room);
-    })
+      return res.status(200).send(req.params.id);
+    });
   })
   .delete((req, res, next) => {
     return Room.findById(req.params.id, (err, entity) => {

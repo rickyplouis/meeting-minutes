@@ -37,16 +37,11 @@ mongoose.connect(mongoURL);
 const messages = [];
 
 io.on('connection', socket => {
-  socket.on('message', (data) => {
-    messages.push(data)
-    socket.broadcast.emit('message', data)
-  })
-})
+
+});
 
 nextApp.prepare().then(() => {
-  app.get('/', (req, res) => {
-    return app.render(req, res);
-  })
+
   app.use('/api/user', userRouter);
   app.use('/api/room', roomRouter);
   app.use('/room', roomHandler);
