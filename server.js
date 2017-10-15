@@ -15,10 +15,12 @@ const handle = app.getRequestHandler()
 require('./config/passport')(passport);
 
 const authRouter = require('./routes/authRouter');
+const userRouter = require('./routes/userRouter');
+const roomRouter = require('./routes/roomRouter');
 
 app.prepare()
 .then(() => {
-  const server = express()
+  const server = express();
   //Required for passport
   server.use(session({ secret: 'someSecretkey'}));
   server.use(passport.initialize());
@@ -36,10 +38,11 @@ app.prepare()
     ]
   }));
 
-  server.use(authRouter);
+  server.use('/', authRouter);
+  server.use('/api/user', userRouter);
+  server.use('/api/room', roomRouter);
 
   const mongoURL = configDB.url;
-
 
   mongoose.connect(mongoURL);
 
